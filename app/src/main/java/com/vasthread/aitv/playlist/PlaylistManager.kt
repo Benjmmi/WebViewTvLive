@@ -22,8 +22,12 @@ import com.vasthread.aitv.misc.preference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.File
@@ -300,6 +304,37 @@ object PlaylistManager {
     }
 
     /**
+     * 检查 URL 是否有效（返回 200 状态码）
+     *
+     * @param url 要检查的 URL
+     * @return 如果 URL 返回 200 状态码则返回 true，否则返回 false
+     */
+    private suspend fun checkUrlIsValid(url: String): Boolean = withContext(Dispatchers.IO) {
+        return@withContext try {
+            val request = Request.Builder()
+                .url(url)
+                .head()  // 使用 HEAD 请求，只获取响应头，不下载内容
+                .build()
+
+            val response = client.newCall(request).execute()
+            val isValid = response.isSuccessful && response.code == 200
+
+            response.close()
+
+            if (isValid) {
+                Log.d(TAG, "URL 有效: $url")
+            } else {
+                Log.d(TAG, "URL 无效 (状态码: ${response.code}): $url")
+            }
+
+            isValid
+        } catch (e: Exception) {
+            Log.d(TAG, "URL 检查失败: $url, 原因: ${e.message}")
+            false
+        }
+    }
+
+    /**
      * 将自定义的M3U格式文本解析成JSON字符串
      *
      * M3U格式说明：
@@ -311,12 +346,14 @@ object PlaylistManager {
      * 1. 遇到 #genre# 标记，表示这是一个分组，后续频道都属于这个分组
      * 2. 普通行表示一个频道，包含频道名和播放URL
      * 3. 同名频道会合并URL到urls列表中（多源支持）
-     * 4. 过滤掉包含"更新时间"的分组
+     * 4. 使用多线程过滤掉无效的 URL（不返回 200 状态码的）
+     * 5. 过滤掉所有 URL 都无效的频道
+     * 6. 过滤掉包含"更新时间"的分组
      *
      * @param m3uText 原始的M3U格式文本，以逗号分隔
      * @return 符合Channel结构的JSON字符串
      */
-    private fun parseM3UTextToJson(m3uText: String): String {
+    private suspend fun parseM3UTextToJson(m3uText: String): String {
         // 使用HashMap存储频道，key为频道名，value为Channel对象
         // 这样可以方便地合并同名频道的多个URL
         val channels = HashMap<String, Channel>()
@@ -362,14 +399,40 @@ object PlaylistManager {
             }
         }
 
-        // 过滤掉包含"更新时间"的频道
+        // 第一步：过滤掉包含"更新时间"的频道
         // 这些通常是频道列表的元信息，不是真正的频道
         val filteredChannels = channels.values.filter { channel ->
             !channel.groupName.contains("更新时间")
         }
 
+        Log.i(TAG, "开始 URL 过滤，总频道数: ${filteredChannels.size}")
+
+        // 第二步：使用协程并发检查所有 URL 的有效性
+        val validatedChannels = coroutineScope {
+            filteredChannels.map { channel ->
+                async {
+                    // 对当前频道的所有 URL 并发进行检查
+                    val validUrls = channel.urls.map { url ->
+                        async {
+                            if (checkUrlIsValid(url)) url else null
+                        }
+                    }.awaitAll().filterNotNull()
+
+                    // 返回包含有效 URL 的频道，如果没有有效 URL 则返回 null
+                    if (validUrls.isNotEmpty()) {
+                        Channel(channel.name, channel.groupName, validUrls)
+                    } else {
+                        Log.d(TAG, "频道 '${channel.name}' 的所有 URL 都无效，将被移除")
+                        null
+                    }
+                }
+            }.awaitAll().filterNotNull()
+        }
+
+        Log.i(TAG, "URL 过滤完成，有效频道数: ${validatedChannels.size}")
+
         // 使用Gson将Channel列表转换成JSON字符串
-        return gson.toJson(filteredChannels)
+        return gson.toJson(validatedChannels)
     }
 
     /**
