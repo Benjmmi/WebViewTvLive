@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: AppSettingsView.kt
  * 描述: 应用设置视图，提供应用级别的配置选项

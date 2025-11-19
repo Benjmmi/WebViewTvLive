@@ -1,8 +1,8 @@
-# WebViewTvLive 代码结构说明
+# AITVLive 代码结构说明
 
 ## 项目简介
 
-WebViewTvLive 是一个基于 Android 的电视直播应用，使用腾讯 X5 WebView 内核加载各大电视台的直播页面，实现自动播放和全屏控制。
+AITVLive 是一个基于 Android 的电视直播应用，使用腾讯 X5 WebView 内核加载各大电视台的直播页面，实现自动播放和全屏控制。
 
 ## 核心技术栈
 
@@ -606,7 +606,7 @@ class Example {
 
 ## 总结
 
-WebViewTvLive 是一个设计良好的 Android 电视直播应用，具有：
+AITVLive 是一个设计良好的 Android 电视直播应用，具有：
 
 ✅ **清晰的架构** - 分层明确，职责单一
 ✅ **灵活的适配** - 支持多种电视台

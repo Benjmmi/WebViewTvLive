@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: WebpageAdapterWebView.kt
  * 描述: 自定义WebView组件，基于腾讯X5内核，用于加载和显示电视直播页面

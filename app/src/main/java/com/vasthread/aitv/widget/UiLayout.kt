@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: UiLayout.kt
  * 描述: 自适应UI布局容器，处理屏幕刘海（异形屏）的适配

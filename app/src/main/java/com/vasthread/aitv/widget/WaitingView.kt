@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: WaitingView.kt
  * 描述: 等待提示视图，当视频加载超时时显示，并自动切换播放源

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: Playlist.kt
  * 描述: 播放列表数据模型，包含多个频道分组

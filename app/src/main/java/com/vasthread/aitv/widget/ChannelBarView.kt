@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: ChannelBarView.kt
  * 描述: 频道信息栏视图，显示当前频道名称和加载进度

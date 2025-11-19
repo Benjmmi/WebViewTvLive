@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: PlaylistView.kt
  * 描述: 频道列表视图，显示和管理频道选择

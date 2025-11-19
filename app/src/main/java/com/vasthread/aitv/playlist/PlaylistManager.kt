@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: PlaylistManager.kt
  * 描述: 播放列表管理器，负责从网络下载、解析和缓存电视频道列表

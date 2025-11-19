@@ -1,5 +1,5 @@
 /**
- * WebViewTvLive - 默认JavaScript模板
+ * AITVLive - 默认JavaScript模板
  *
  * 这个脚本会被注入到电视台网页中，用于：
  * 1. 自动检测和控制网页中的视频元素

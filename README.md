@@ -2,10 +2,10 @@
     <h1>WebView 电视</h1>
 <div align="center">
 
-![GitHub Repo stars](https://img.shields.io/github/stars/hxh19950701/WebViewTvLive)
-![GitHub top language](https://img.shields.io/github/languages/top/hxh19950701/WebViewTvLive)
-![GitHub repo size](https://img.shields.io/github/repo-size/hxh19950701/WebViewTvLive)
-![GitHub Release](https://img.shields.io/github/v/release/hxh19950701/WebViewTvLive)
+![GitHub Repo stars](https://img.shields.io/github/stars/hxh19950701/AITVLive)
+![GitHub top language](https://img.shields.io/github/languages/top/hxh19950701/AITVLive)
+![GitHub repo size](https://img.shields.io/github/repo-size/hxh19950701/AITVLive)
+![GitHub Release](https://img.shields.io/github/v/release/hxh19950701/AITVLive)
 
 </div>
     <p>使用 腾讯X5 WebView 开发的电视直播App</p>
@@ -34,7 +34,7 @@
 
 ## 获取应用
 - GitHub <br>
-https://github.com/hxh19950701/WebViewTvLive/releases <br>
+https://github.com/hxh19950701/AITVLive/releases <br>
 
 ## 优势
 - 直接使用官网直播链接，非常稳定可靠

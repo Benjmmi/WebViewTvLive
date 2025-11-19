@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: ChannelPlayerView.kt
  * 描述: 频道播放器视图，封装WebView和相关UI组件，提供完整的播放功能

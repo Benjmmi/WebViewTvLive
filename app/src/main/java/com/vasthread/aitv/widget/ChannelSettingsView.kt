@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: ChannelSettingsView.kt
  * 描述: 频道设置视图，显示和调整当前频道的各种设置

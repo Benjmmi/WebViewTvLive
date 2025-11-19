@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: SettingsManager.kt
  * 描述: 应用设置管理器，负责管理和持久化各种用户设置

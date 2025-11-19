@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 WebViewTvLive
+ * Copyright (c) 2025 AITVLive
  *
  * 文件: MainActivity.kt
  * 描述: 应用的主Activity，负责管理整个应用的UI界面和用户交互逻辑
