@@ -33,7 +33,6 @@ import com.vasthread.aitv.settings.SettingsManager
 import com.vasthread.aitv.widget.AppSettingsView
 import com.vasthread.aitv.widget.ChannelPlayerView
 import com.vasthread.aitv.widget.ChannelSettingsView
-import com.vasthread.aitv.widget.ExitConfirmView
 import com.vasthread.aitv.widget.PlaylistView
 import me.jessyan.autosize.AutoSize
 
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         private enum class UiMode {
             STANDARD,           // 标准播放模式
             CHANNELS,           // 频道列表选择模式
-            EXIT_CONFIRM,       // 退出确认模式
             APP_SETTINGS,       // 应用设置模式
             CHANNEL_SETTINGS    // 频道设置模式
         }
@@ -112,9 +110,6 @@ class MainActivity : AppCompatActivity() {
     /** 频道列表视图，显示所有可用频道 */
     private lateinit var playlistView: PlaylistView
 
-    /** 退出确认对话框视图 */
-//    private lateinit var exitConfirmView: ExitConfirmView
-
     /** 频道设置视图，用于调整当前频道的设置 */
     private lateinit var channelSettingsView: ChannelSettingsView
 
@@ -142,7 +137,6 @@ class MainActivity : AppCompatActivity() {
 
             // 根据当前模式显示或隐藏相应的视图
             playlistView.visibility = if (value == UiMode.CHANNELS) View.VISIBLE else View.GONE
-//            exitConfirmView.visibility = if (value == UiMode.EXIT_CONFIRM) View.VISIBLE else View.GONE
             channelSettingsView.visibility = if (value == UiMode.CHANNEL_SETTINGS) View.VISIBLE else View.GONE
             appSettingsView.visibility = if (value == UiMode.APP_SETTINGS) View.VISIBLE else View.GONE
 
@@ -193,7 +187,6 @@ class MainActivity : AppCompatActivity() {
         uiLayout = findViewById(R.id.uiLayout)
         playerView = findViewById(R.id.player)
         playlistView = findViewById(R.id.playlist)
-//        exitConfirmView = findViewById(R.id.exitConfirm)
         channelSettingsView = findViewById(R.id.channelSettings)
         appSettingsView = findViewById(R.id.appSettings)
 
@@ -267,17 +260,6 @@ class MainActivity : AppCompatActivity() {
 
         // 频道设置视图获取视频尺寸的回调
         channelSettingsView.onGetVideoSize = { playerView.getVideoSize() }
-
-//        // 退出确认视图的用户选择回调
-//        exitConfirmView.onUserSelection = { selection ->
-//            if (selection == ExitConfirmView.Selection.EXIT) {
-//                // 用户确认退出，结束Activity
-//                finish()
-//            } else {
-//                // 用户取消退出，进入应用设置模式
-//                uiMode = UiMode.APP_SETTINGS
-//            }
-//        }
 
         // 播放器视图的关闭所有UI回调
         playerView.dismissAllViewCallback = { uiMode = UiMode.STANDARD }
@@ -495,9 +477,6 @@ class MainActivity : AppCompatActivity() {
             UiMode.CHANNELS -> {
                 // 频道列表模式：将按键交给频道列表视图处理
                 if (playlistView.dispatchKeyEvent(event)) return true
-            }
-            UiMode.EXIT_CONFIRM -> {
-                // 退出确认模式：将按键交给退出确认视图处理
             }
             UiMode.CHANNEL_SETTINGS -> {
                 // 频道设置模式：将按键交给频道设置视图处理
