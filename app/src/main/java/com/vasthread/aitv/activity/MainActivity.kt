@@ -426,11 +426,12 @@ class MainActivity : AppCompatActivity() {
      */
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        uiMode = if (uiMode == UiMode.STANDARD) {
-            UiMode.EXIT_CONFIRM  // 标准模式下按返回键显示退出确认
-        } else {
-            UiMode.STANDARD      // 其他模式下按返回键返回标准模式
-        }
+        finish()
+//        uiMode = if (uiMode == UiMode.STANDARD) {
+//            UiMode.EXIT_CONFIRM  // 标准模式下按返回键显示退出确认
+//        } else {
+//            UiMode.STANDARD      // 其他模式下按返回键返回标准模式
+//        }
     }
 
     /**
